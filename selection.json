@@ -1,0 +1,37 @@
+{
+  "frontend": {
+    "requested": "nextjs",
+    "variant_requested": "enterprise",
+    "chosen": "nextjs",
+    "variant": "base",
+    "downgrade_reason": "Downgraded frontend nextjs enterprise → base"
+  },
+  "backend": {
+    "requested": "none",
+    "variant_requested": "enterprise",
+    "chosen": "none",
+    "variant": "base",
+    "downgrade_reason": "Downgraded backend none enterprise → base"
+  },
+  "database": {
+    "requested": "none",
+    "variant": "base"
+  },
+  "compliance": [
+    "accessibility",
+    "performance"
+  ],
+  "engine_checks": [
+    {
+      "engine": "node",
+      "required": ">=20.10.0",
+      "current": "v20.19.5",
+      "ok": true
+    }
+  ],
+  "warnings": [
+    "Downgraded frontend nextjs enterprise → base",
+    "Downgraded backend none enterprise → base"
+  ],
+  "status": "ok"
+}
