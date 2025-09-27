@@ -7,7 +7,6 @@ yarn-error.log*
 # Production builds
 dist/
 build/
-.next/
 out/
 
 # Environment variables
@@ -52,7 +51,7 @@ coverage/
 jspm_packages/
 
 # Optional npm cache directory
-.npm
+
 
 # Optional REPL history
 .node_repl_history
