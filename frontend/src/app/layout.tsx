@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Inter } from 'next/font/google';
+import clsx from 'clsx';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'developer-portfolio';
 const APP_DESC = process.env.NEXT_PUBLIC_APP_DESCRIPTION || 'Generated Next.js app';
@@ -23,25 +25,48 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={clsx(
+          'relative min-h-screen font-sans text-foreground',
+          inter.variable,
+          jetbrains.variable,
+        )}
+      >
         <Providers>
-          <div className="min-h-screen flex flex-col">
-            <header className="bg-white shadow-sm border-b">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                  <h1 className="text-xl font-semibold">{APP_NAME}</h1>
-                  <nav className="space-x-4">
-                    <Link href="/" className="text-gray-700 hover:text-gray-900">Home</Link>
-                    <Link href="/dashboard" className="text-gray-700 hover:text-gray-900">Dashboard</Link>
-                  </nav>
+          <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+            <div className="absolute inset-0 quantum-grid opacity-40" aria-hidden />
+            <div className="absolute -left-32 top-24 h-[420px] w-[420px] animate-pulse rounded-full bg-cyan-500/20 blur-[160px]" aria-hidden />
+            <div className="absolute -right-24 bottom-0 h-[460px] w-[460px] animate-pulse rounded-full bg-emerald-500/20 blur-[180px]" aria-hidden />
+          </div>
+
+          <div className="flex min-h-screen flex-col">
+            <header className="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl">
+              <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.4em] text-white/60">Quantum Sales Studio</p>
+                  <h1 className="text-lg font-semibold text-white">{APP_NAME}</h1>
                 </div>
+                <nav className="flex items-center gap-6 text-sm font-medium text-white/70">
+                  <Link className="transition hover:text-white" href="/">
+                    Home
+                  </Link>
+                  <Link className="transition hover:text-white" href="/dashboard">
+                    Dashboard
+                  </Link>
+                  <Link className="transition hover:text-white" href="/docs">
+                    Docs
+                  </Link>
+                </nav>
               </div>
             </header>
-            <main className="flex-1">{children}</main>
-            <footer className="bg-gray-50 border-t">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                <p className="text-center text-sm text-gray-500">© {new Date().getFullYear()} {APP_NAME}. All rights reserved.</p>
+
+            <main className="relative z-10 flex-1 pb-16">{children}</main>
+
+            <footer className="border-t border-white/10 bg-black/40 py-6 backdrop-blur-xl">
+              <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-2 px-6 text-center text-xs text-white/60 sm:flex-row sm:justify-between sm:text-left">
+                <span>© {new Date().getFullYear()} {APP_NAME}. All rights reserved.</span>
+                <span>Built for enterprise-grade experiences.</span>
               </div>
             </footer>
           </div>
